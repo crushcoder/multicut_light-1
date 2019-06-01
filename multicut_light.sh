@@ -57,7 +57,7 @@ else
 	CutListAT=$(cat ~/.cutlist.at | head -n 1)	# Ja -> URL auslesen
 fi
 
-if 	! for i in avidemux{,2}{,_gtk,_qt4}; do
+if 	! for i in avidemux{,2}{,_cli,_gtk,_qt4}; do
 		# auf Existenz testen und ausschließen, dass es kein Link ist	
 		pfad=$(which $i) && ls -l $pfad | grep -v ^lrwx > /dev/null && avidemux=$i && break
 	done
