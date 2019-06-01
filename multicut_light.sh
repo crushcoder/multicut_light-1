@@ -4,7 +4,7 @@
 # Anleitung  -> http://wiki.onlinetvrecorder.com/index.php/Cutlist-Austausch/Linux-Skripte (Wiki ist inzwischen tot)
 # Diskussion -> http://otrforum.com/showthread.php?t=38342
 
-Stand="05.08.2017"
+Stand="01.07.2019"
 
 # Konfiguration
 ADversion="2.5"						# Version von Avidemux (2.4 oder 2.5)
@@ -25,6 +25,7 @@ nachlauf=5						# Nachlauf zum Ueberpruefen mit dem mplayer
 vorlauf=10						# Vorlauf zum Ueberpruefen mit dem mplayer
 HQcutwithVD=0						# VirtualDub (via wine) fuer HQ benutzen
 convertHQ2MKV=0						# HQ-AVIs in MKVs verwandeln
+avidemuxOptions="--nogui --force-smart --audio-map --autoindex" # Optionen für avidemux, hier um vollautomatisch zu laufen 
 username=$(whoami)					# Username fuer VD-Pfad
 vdubdir=$(ls /home/$username | grep VirtualDub)		# VD-Pfad
 vdub="/home/$username/$vdubdir/vdub.exe"		# 
@@ -646,7 +647,7 @@ if [ $(echo $filename | grep mpg.H[QD].avi | wc -l) -eq 0 ] || [ $HQcutwithVD -e
 		cutname="$cutdir/${aviname%.mpg.avi}-cut.avi"
 	fi
 	project_end
-	nice -n 15 $avidemux --force-smart --run $tempdir/project.js --quit 1>/dev/null 
+	nice -n 15 $avidemux $avidemuxOptions --run $tempdir/project.js --quit 1>/dev/null 
 	echo;echo
 	mv $filename $uncutname 2> /dev/null
 else								# sonst verwende VirtualDub via wine
