@@ -333,6 +333,7 @@ else
 	selected=""
 	if [ $Auto -eq 1 ] ; then
 		selected="1"
+		echo "${Cutlist_filename_original[${showindex[$selected]}]}" >> $tempdir/autoname$SmartIndex
 		printf "$c_rot Automatikmodus: Waehle die erste Cutlist! $c_normal \n"
 	else
 		read -p "Auswahl: " select
@@ -752,7 +753,6 @@ else
 		while [ $index -le $number ] ; do			# Dateinamen und Kommentare auslesen
 			if [ $(echo ${Cutlist_filename[$index]} | wc -w) -ne 0 ] ; then
 				echo ${Cutlist_filename[$index]} >> $tempdir/sugestedNames
-				echo ${Cutlist_filename[$index]} >> $tempdir/autoname
 			fi
 			if [ $(echo ${Cutlist_usercomment[$index]} | wc -w) -ne 0 ] && [ $useCommentsforMovieName -eq 1 ] ; then
 				echo ${Cutlist_usercomment[$index]} >> $tempdir/sugestedNames
